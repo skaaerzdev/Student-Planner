@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-text">
+            <p class="title">Web Development Coursework</p>
+            <h1>Student Study Planner</h1>
+            <p class="subtitle">An all in one study planner. Deadlines, marks, revisions in one place.</p>
+        </div>
+
+        <!-- Timer HTML -->
+        <div class="timer-box">
+            <div class="timer-ring-wrap">
+                <svg class="timer-ring" viewBox="0 0 200 200" aria-hidden="true">
+                    <circle class="ring-bg" cx="100" cy="100" r="88"></circle>
+                    <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88"></circle>
+                </svg>
+                <div class="timer-display" id="timerDisplay">25:00</div>
+            </div>
+            <div class="timer-info">
+            <p class="timer-eyebrow">Focus timer</p>
+            <p class="timer-label" id="timerLabel">Ready for your next study session.</p>
+            <div class="timer-controls">
+                <button id="focusToggleBtn" type="button">Start Focus</button>
+                <button id="focusResetBtn" type="button" class="ghost-btn">End Session</button>
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-layout">
+        <section class="panel wide-panel">
+            <div class="panel-heading">
+                <h2>Upcoming Alerts</h2>
+                <p>Deadlines and revision tasks due in the next 30 days.</p>
+            </div>
+            <div id="alert-list" class="alert-list"></div>
+        </section>
+
+        <section class="panel wide-panel">
+            <div class="panel-heading">
+                <h2>Assessment Calendar</h2>
+                <p>All coursework and exam deadlines</p>
+            </div>
+            <div id="calendar-list" class="calendar-list"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Add Revision Task</h2>
+                <p>Create personal study tasks and keep them in due-date order.</p>
+            </div>
+
+            <form id="task-form" class="form-layout">
+                <label for="task-text">Task description</label>
+                <input id="task-text" name="taskText" type="text" maxlength="120" placeholder="Read chapter 5 notes" required>
+
+                <label for="task-link">Resource link (optional)</label>
+                <input id="task-link" name="taskLink" type="url" placeholder="https://canvas.ljmu.ac.uk/">
+
+                <label for="task-due-date">Due date</label>
+                <input id="task-due-date" name="taskDueDate" type="date" required>
+
+                <button class="primary-btn" type="submit">Add Revision Task</button>
+            </form>
+
+            <p id="task-message" class="form-message"></p>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Revision Tasks</h2>
+                <p>Tasks are shown by closest due date first.</p>
+            </div>
+            <div id="task-list" class="task-list"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Grade Goal</h2>
+                <p>Choose your target and compare it with entered marks.</p>
+            </div>
+
+            <div class="goal-area">
+                <label for="goal-select">Final overall goal</label>
+                <select id="goal-select">
+                    <option value="40">Third Class (40%+)</option>
+                    <option value="50">2:2 (50%+)</option>
+                    <option value="60" selected>2:1 (60%+)</option>
+                    <option value="70">First Class (70%+)</option>
+                </select>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-bar">
+                    <div id="goal-progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="goal-summary" class="goal-summary">Enter some marks to see your progress.</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h2>Assessment Marks</h2>
+                <p>Enter marks from 0 to 100. Module grades are calculated automatically.</p>
+            </div>
+            <div id="mark-list" class="mark-list"></div>
+            <p id="mark-message" class="form-message"></p>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose" type="button">&times;</button>
+            <div class="modal-body">
+                <h2>Start a focus session</h2>
+                <p class="modal-copy">Choose a study length between 15 and 40 minutes, then press start.</p>
+                <label for="timerMinutes">Session length</label>
+                <input type="range" id="timerMinutes" min="15" max="40" value="25" step="1">
+                <div class="timer-modal-footer">
+                    <span class="timer-val" id="timerVal">25 min</span>
+                    <button id="timerStart" type="button">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        Dawid Zurek [1166185]
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
